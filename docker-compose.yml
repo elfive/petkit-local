@@ -39,7 +39,7 @@ services:
     # per-architecture base cannot fall back safely without it.
     # build: ./addon
     container_name: petkit-local
-    restart: unless-stopped
+    restart: always
 
     ports:
       # Device HTTP API.
@@ -51,10 +51,10 @@ services:
       # container still listens on 8080; only the host side moved. Ingenic
       # models take the port from the URL they are provisioned with, so for
       # those any host port works as long as --api-url below matches.
-      - "80:8080"
+      - "19080:8080"
 
       # Device MQTT over TLS. Not a choice: 443 is where the firmware looks.
-      - "443:443"
+      # - "443:443"
 
       # Media uploads. The device PUTs its photos and video here.
       - "9000:9000"
@@ -83,7 +83,7 @@ services:
       # Assistant can reach add-ons by hostname on its internal network. There
       # is no such network here, hence the mapping. If you also run the go2rtc
       # add-on or container, give this a different host port — 8554 is theirs.
-      - "8554:8554"
+      # - "8554:8554"
 
       # 1883 (plain MQTT) is deliberately NOT published. It is the internal
       # listener the bridge uses, and publishing it would clash with a broker
@@ -91,10 +91,10 @@ services:
 
     volumes:
       # Device identities, settings, the event database and captures.
-      - ./data:/data
+      - /volume1/docker/petkit-local/data:/data
       # Recordings and snapshots. Point this at your Home Assistant media
       # directory to browse them from HA, or leave it local.
-      - ./media:/media/petkit
+      - /volume1/docker/petkit-local/media:/media/petkit
 
     command:
       - python3
