@@ -40,8 +40,8 @@ services:
     # build: ./addon
     container_name: petkit-local
     restart: always
-
-    ports:
+    network_mode: host
+    # ports:
       # Device HTTP API.
       #
       # Host 80, and worth keeping there. An ESP32 model (T4, D4) provisioned
@@ -51,13 +51,13 @@ services:
       # container still listens on 8080; only the host side moved. Ingenic
       # models take the port from the URL they are provisioned with, so for
       # those any host port works as long as --api-url below matches.
-      - "19080:19080"
+      # - "19080:19080"
 
       # Device MQTT over TLS. Not a choice: 443 is where the firmware looks.
       # - "443:443"
 
       # Media uploads. The device PUTs its photos and video here.
-      - "9000:9000"
+      # - "9000:9000"
 
       # The web panel. IT HAS NO AUTHENTICATION, and it can control your
       # devices, read the recordings and run the on-device patchers. Under the
@@ -69,7 +69,7 @@ services:
       #                          an SSH tunnel or put your own authenticating
       #                          proxy in front)
       #   "8099:8099"            reachable from anywhere on your network
-      - "8099:8099"
+      # - "8099:8099"
 
       # Camera RTSP, served by the bundled go2rtc. This is the address to give
       # Home Assistant's Generic Camera — rtsp://THIS-HOST:8554/<device-id>,
@@ -91,10 +91,10 @@ services:
 
     volumes:
       # Device identities, settings, the event database and captures.
-      - /volume1/docker/petkit-local/data:/data
+      - /opt/data/container/docker/petkit-local/data:/data
       # Recordings and snapshots. Point this at your Home Assistant media
       # directory to browse them from HA, or leave it local.
-      - /volume1/docker/petkit-local/media:/media/petkit
+      - /opt/data/container/docker/petkit-local/media:/media/petkit
 
     command:
       - python3
