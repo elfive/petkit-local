@@ -51,7 +51,7 @@ services:
       # container still listens on 8080; only the host side moved. Ingenic
       # models take the port from the URL they are provisioned with, so for
       # those any host port works as long as --api-url below matches.
-      - "19080:8080"
+      - "19080:19080"
 
       # Device MQTT over TLS. Not a choice: 443 is where the firmware looks.
       # - "443:443"
