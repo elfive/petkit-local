@@ -118,7 +118,7 @@ services:
       - --port=19080
       - --no-ha
       - --mqtt-tls
-      - --mqtt-tls-port=443
+      - --mqtt-tls-port=19443
       # Your Home Assistant MQTT broker, so entities appear via MQTT discovery.
       # Drop these two lines (or pass --no-ha) to run with no Home Assistant at
       # all: the web panel and the local cloud work regardless.
