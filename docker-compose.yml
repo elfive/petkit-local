@@ -115,13 +115,17 @@ services:
       # Use this when devices must upload through a different hostname, port or
       # TLS-terminating proxy than the API host.
       # - --bucket-endpoint=https://CHANGE-ME:9000
+      - --web-port=8099
       - --port=19080
-      - --no-ha
+      # - --no-mqtt
       - --mqtt-tls
-      - --mqtt-tls-port=19443
+      - --mqtt-tls-port=443
+      # - --mqtt-cert=${PETKIT_MQTT_CERT:-/etc/cert.crt}
+      # - --mqtt-key=${PETKIT_MQTT_KEY:-/etc/cert.key}
       # Your Home Assistant MQTT broker, so entities appear via MQTT discovery.
       # Drop these two lines (or pass --no-ha) to run with no Home Assistant at
       # all: the web panel and the local cloud work regardless.
+      - --no-ha
       # - --ha-mqtt-host=${PETKIT_HA_MQTT_HOST:?not set. Put it in .env, or delete this line to run without Home Assistant.}
       # - --ha-mqtt-port=1883
       # Uncomment if your broker requires credentials.
