@@ -120,8 +120,8 @@ services:
       # - --no-mqtt
       - --mqtt-tls
       - --mqtt-tls-port=443
-      # - --mqtt-cert=${PETKIT_MQTT_CERT:-/etc/cert.crt}
-      # - --mqtt-key=${PETKIT_MQTT_KEY:-/etc/cert.key}
+      - --mqtt-cert=${PETKIT_MQTT_CERT:-/etc/cert.crt}
+      - --mqtt-key=${PETKIT_MQTT_KEY:-/etc/cert.key}
       # Your Home Assistant MQTT broker, so entities appear via MQTT discovery.
       # Drop these two lines (or pass --no-ha) to run with no Home Assistant at
       # all: the web panel and the local cloud work regardless.
