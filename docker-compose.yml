@@ -95,6 +95,7 @@ services:
       # Recordings and snapshots. Point this at your Home Assistant media
       # directory to browse them from HA, or leave it local.
       - /opt/data/container/docker/petkit-local/media:/media/petkit
+      - ${PETKIT_HOST_CERT_DIR:-/etc/nginx/cert}:/cert:r
 
     command:
       - python3
@@ -120,8 +121,8 @@ services:
       # - --no-mqtt
       - --mqtt-tls
       - --mqtt-tls-port=443
-      - --mqtt-cert=${PETKIT_MQTT_CERT:-/etc/cert.crt}
-      - --mqtt-key=${PETKIT_MQTT_KEY:-/etc/cert.key}
+      - --mqtt-cert=/cert/${PETKIT_MQTT_CERT_FILE:-mqtt_server.crt}
+      - --mqtt-key=/cert/${PETKIT_MQTT_KEY_FILE:-mqtt_server.key}
       # Your Home Assistant MQTT broker, so entities appear via MQTT discovery.
       # Drop these two lines (or pass --no-ha) to run with no Home Assistant at
       # all: the web panel and the local cloud work regardless.
